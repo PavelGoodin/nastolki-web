@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +14,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 Auth::routes();
 
+/*
+Route::view('/private','private')->middleware('auth')->name('private');
+
+Route::get('/login', function(){
+    if(Auth::check()){
+        return redirect(route('user.private'));
+    }
+
+    return view('login');
+})->name('login');
+
+Route::get('/registrasion', function(){
+
+    if(Auth::check()){
+        return redirect(route('user.private'));
+    }
+
+    return view('registration');
+});
+*/
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
